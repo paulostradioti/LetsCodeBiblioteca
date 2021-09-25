@@ -1,3 +1,7 @@
+using LetsCodeBiblioteca.Models.Contracts.Repositories;
+using LetsCodeBiblioteca.Models.Contracts.Services;
+using LetsCodeBiblioteca.Models.Repositories;
+using LetsCodeBiblioteca.Models.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +28,9 @@ namespace LetsCodeBiblioteca
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddScoped<ILivroRepository, LivroRepository>();
+            services.AddScoped<ILivroService, LivroService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -89,5 +89,18 @@ namespace LetsCodeBiblioteca.Controllers
             
         }
 
+        public IActionResult Details(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+                return NotFound();
+
+            var livro = _livroService.PesquisarPorId(id);
+
+            if (livro == null)
+                return NotFound();
+
+            return View(livro);
+        }
+
     }
 }

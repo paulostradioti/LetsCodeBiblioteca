@@ -66,6 +66,17 @@ namespace LetsCodeBiblioteca.Models.Services
             }
         }
 
-       
+        public LivroDto Detalhes(string id)
+        {
+            try
+            {
+                return _livroRepository.PesquisarPorId(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

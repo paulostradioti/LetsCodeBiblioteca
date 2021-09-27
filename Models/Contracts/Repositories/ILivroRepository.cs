@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace LetsCodeBiblioteca.Models.Contracts.Repositories
 {
-   public interface ILivroRepository
+    public interface ILivroRepository
     {
+        void Cadastrar(LivroDto livro);
         List<LivroDto> Listar();
+        LivroDto PesquisarPorId(string id);
+        void Atualizar(LivroDto livro);
     }
+
+    
+    
 }

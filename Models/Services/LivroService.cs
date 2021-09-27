@@ -16,6 +16,31 @@ namespace LetsCodeBiblioteca.Models.Services
         {
             _livroRepository = livroRepository;
         }
+
+        public void Atualizar(LivroDto livro)
+        {
+            try
+            {
+                _livroRepository.Atualizar(livro);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Cadastrar(LivroDto livro)
+        {
+            try
+            {
+                _livroRepository.Cadastrar(livro);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public List<LivroDto> Listar()
         {
             try
@@ -28,5 +53,19 @@ namespace LetsCodeBiblioteca.Models.Services
             }
            
         }
+
+        public LivroDto PesquisarPorId(string id)
+        {
+            try
+            {
+                return _livroRepository.PesquisarPorId(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+       
     }
 }

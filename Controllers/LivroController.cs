@@ -1,4 +1,5 @@
 ﻿using LetsCodeBiblioteca.Models.Contracts.Services;
+using LetsCodeBiblioteca.Models.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -18,19 +19,75 @@ namespace LetsCodeBiblioteca.Controllers
         {
             return View();
         }
-
         public IActionResult List()
         {
             try
             {
-              var livros = _livroService.Listar();
+                var livros = _livroService.Listar();
                 return View(livros);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
+
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create([Bind("Nome, Autor, Editora, Categoria, Ano")]LivroDto livro )
+        {
+
+            try
+            {
+                _livroService.Cadastrar(livro);
+
+                return RedirectToAction("List");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+             
+        }
+       
+        public IActionResult Edit(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+                return NotFound();
+
+            var livro = _livroService.PesquisarPorId(id);
+
+            if (livro == null)
+                return NotFound();
+
+            return View(livro);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit([Bind("Id, Nome, Autor Editora, Categoria, Ano")]LivroDto livro)
+        {
+            if (string.IsNullOrEmpty(livro.Id))
+                return NotFound();
+
+            try
+            {
+                _livroService.Atualizar(livro);
+
+                return RedirectToAction("List");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+           
             
         }
+
     }
 }

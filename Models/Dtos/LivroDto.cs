@@ -8,18 +8,22 @@ namespace LetsCodeBiblioteca.Models.Dtos
 {
     public class LivroDto : EntidadeBase
     {
-        public int Id { get; set; }
+        public string id { get; set; }
         public string Nome { get; set; }
         public string Autor { get; set; }
         public string Editora { get; set; }
-      
         public string Categoria { get; set; }
         public int Ano { get; set; }
 
-        
+        public LivroDto()
+        {
+            
+        }
 
 
-        public LivroDto(int id, string nome, string autor, string editora, string categoria, int ano)
+       
+
+        public LivroDto(string id, string nome, string autor, string editora, string categoria, int ano)
             :this(nome, autor, editora, categoria, ano)
         {
             this.Id = id;

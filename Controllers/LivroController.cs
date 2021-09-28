@@ -55,7 +55,7 @@ namespace LetsCodeBiblioteca.Controllers
              
         }
        
-        public IActionResult Edit(string id)
+        public IActionResult Edit(string id)  //Edit para pesquisar atualização
         {
             if (string.IsNullOrEmpty(id))
                 return NotFound();
@@ -100,6 +100,32 @@ namespace LetsCodeBiblioteca.Controllers
                 return NotFound();
 
             return View(livro);
+        }
+
+        public IActionResult Delete(string? id)
+        {
+            if (string.IsNullOrEmpty(id))
+                return NotFound();
+
+            var livro = _livroService.PesquisarPorId(id);
+
+            if (livro == null)
+                return NotFound();
+
+            return View(livro);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete([Bind("Id, Nome, Autor Editora, Categoria, Ano")] LivroDto livro)
+        {
+           
+   
+                _livroService.Excluir(livro.Id);
+
+                return RedirectToAction("List");
+            
+     
         }
 
     }

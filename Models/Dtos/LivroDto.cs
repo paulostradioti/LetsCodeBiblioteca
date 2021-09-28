@@ -1,6 +1,7 @@
 ﻿using LetsCodeBiblioteca.Models.Entidades;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,7 +9,8 @@ namespace LetsCodeBiblioteca.Models.Dtos
 {
     public class LivroDto : EntidadeBase
     {
-        public string id { get; set; }
+       [Key]
+        public int id { get; set; }
         public string Nome { get; set; }
         public string Autor { get; set; }
         public string Editora { get; set; }

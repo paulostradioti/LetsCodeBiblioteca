@@ -37,9 +37,10 @@ namespace LetsCodeBiblioteca.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Nome, Autor, Editora, Categoria, Ano")]LivroDto livro )
+        public IActionResult Create([Bind("Nome, Autor, Editora, Categoria, Ano")] LivroDto livro)
         {
 
             try
@@ -52,13 +53,13 @@ namespace LetsCodeBiblioteca.Controllers
             {
                 throw ex;
             }
-             
+
         }
-       
-        public IActionResult Edit(string id)  //Edit para pesquisar atualização
+
+        public IActionResult Edit(int id)  //Edit para pesquisar atualização
         {
-            if (string.IsNullOrEmpty(id))
-                return NotFound();
+            //if (string.IsNullOrEmpty(id))
+            //    return NotFound();
 
             var livro = _livroService.PesquisarPorId(id);
 
@@ -70,10 +71,10 @@ namespace LetsCodeBiblioteca.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Id, Nome, Autor Editora, Categoria, Ano")]LivroDto livro)
+        public IActionResult Edit([Bind("Id, Nome, Autor Editora, Categoria, Ano")] LivroDto livro)
         {
-            if (string.IsNullOrEmpty(livro.Id))
-                return NotFound();
+            //if (string.IsNullOrEmpty(livro.Id))
+            //    return NotFound();
 
             try
             {
@@ -85,14 +86,14 @@ namespace LetsCodeBiblioteca.Controllers
             {
                 throw ex;
             }
-           
-            
+
+
         }
 
-        public IActionResult Details(string id)
+        public IActionResult Details(int id)
         {
-            if (string.IsNullOrEmpty(id))
-                return NotFound();
+            //if (string.IsNullOrEmpty(id))
+            //    return NotFound();
 
             var livro = _livroService.PesquisarPorId(id);
 
@@ -102,10 +103,10 @@ namespace LetsCodeBiblioteca.Controllers
             return View(livro);
         }
 
-        public IActionResult Delete(string? id)
+        public IActionResult Delete(int id)
         {
-            if (string.IsNullOrEmpty(id))
-                return NotFound();
+            //if (string.IsNullOrEmpty(id))
+            //    return NotFound();
 
             var livro = _livroService.PesquisarPorId(id);
 
@@ -119,13 +120,13 @@ namespace LetsCodeBiblioteca.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Delete([Bind("Id, Nome, Autor Editora, Categoria, Ano")] LivroDto livro)
         {
-           
-   
-                _livroService.Excluir(livro.Id);
 
-                return RedirectToAction("List");
-            
-     
+
+            _livroService.Excluir(livro.Id);
+
+            return RedirectToAction("List");
+
+
         }
 
     }

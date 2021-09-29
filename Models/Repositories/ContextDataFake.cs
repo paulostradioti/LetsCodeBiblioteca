@@ -10,10 +10,12 @@ namespace LetsCodeBiblioteca.Models.Repositories
 
     public class ContextDataFake : IContextData // Implementando a interface criada para trabalhar com qualquer BD
     {
+        private readonly Context _dbContext;
         private static List<LivroDto> livros; // vai ter os proprios métodos que vão tratar essa informação, nomeado livro por ser privado
 
-        public ContextDataFake()
+        public ContextDataFake(Context dbContext)
         {
+            _dbContext = dbContext;
             livros = new List<LivroDto>();
             InitializeData();
         }
@@ -36,6 +38,9 @@ namespace LetsCodeBiblioteca.Models.Repositories
         {
             try
             {
+                _dbContext.Add(livro);
+                _dbContext.SaveChanges();
+
                 livros.Add(livro);
             }
             catch (Exception ex)
@@ -44,7 +49,7 @@ namespace LetsCodeBiblioteca.Models.Repositories
             }
         }
 
-        public void ExcluirLivro(string id)
+        public void ExcluirLivro(int id)
         {
             var objPesquisa = PesquisarLivroPorId(id);
             livros.Remove(objPesquisa);
@@ -58,7 +63,7 @@ namespace LetsCodeBiblioteca.Models.Repositories
                 .ToList();
         }
 
-        public LivroDto PesquisarLivroPorId(string id)
+        public LivroDto PesquisarLivroPorId(int id)
         {
            return livros.FirstOrDefault(p => p.Id == id);
             

@@ -11,8 +11,8 @@ namespace LetsCodeBiblioteca.Models.Contracts.Contexts
         void CadastrarLivro(LivroDto livro);
         List<LivroDto> ListarLivro();
 
-        LivroDto PesquisarLivroPorId(string id);
+        LivroDto PesquisarLivroPorId(int id);
         void AtualizarLivro(LivroDto livro);
-        void ExcluirLivro(string id);
+        void ExcluirLivro(int id);
     }
 }

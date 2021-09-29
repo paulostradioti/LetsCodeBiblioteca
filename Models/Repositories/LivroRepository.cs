@@ -26,7 +26,7 @@ namespace LetsCodeBiblioteca.Models.Repositories
             _contextData.CadastrarLivro(livro);
         }
 
-        public void Excluir(string id)
+        public void Excluir(int id)
         {
             _contextData.ExcluirLivro(id);
         }
@@ -36,7 +36,7 @@ namespace LetsCodeBiblioteca.Models.Repositories
             return _contextData.ListarLivro();
         }
 
-        public LivroDto PesquisarPorId(string id)
+        public LivroDto PesquisarPorId(int id)
         {
             return _contextData.PesquisarLivroPorId(id);
         }

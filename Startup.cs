@@ -33,10 +33,9 @@ namespace LetsCodeBiblioteca
 
             services.AddScoped<ILivroRepository, LivroRepository>();
             services.AddScoped<ILivroService, LivroService>();
+            services.AddScoped<IContextData, ContextDataFake>();
 
-            services.AddSingleton<IContextData, ContextDataFake>();
-
-            var connectionString = @"Server=localhost\SQLEXPRESS01;Database=LetsCodeBiblioteca;Trusted_Connection=True;";
+            var connectionString = @"Server=localhost;Database=LetsCodeBiblioteca;Trusted_Connection=True;";
 
             services.AddDbContext<Context>(options =>
             {

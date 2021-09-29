@@ -54,7 +54,7 @@ namespace LetsCodeBiblioteca.Models.Services
            
         }
 
-        public LivroDto PesquisarPorId(string id)
+        public LivroDto PesquisarPorId(int id)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace LetsCodeBiblioteca.Models.Services
             }
         }
 
-        public LivroDto Detalhes(string id)
+        public LivroDto Detalhes(int id)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace LetsCodeBiblioteca.Models.Services
             }
         }
 
-        public void Excluir(string id)
+        public void Excluir(int id)
         {
             try
             {

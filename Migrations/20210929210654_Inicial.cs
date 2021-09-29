@@ -10,18 +10,17 @@ namespace LetsCodeBiblioteca.Migrations
                 name: "Livros",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Autor = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Editora = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Categoria = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Ano = table.Column<int>(type: "int", nullable: false),
-                   
+                    Ano = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Livros", x => x.id);
+                    table.PrimaryKey("PK_Livros", x => x.Id);
                 });
         }
 

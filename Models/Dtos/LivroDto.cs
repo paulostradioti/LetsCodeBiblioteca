@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,8 +10,7 @@ namespace LetsCodeBiblioteca.Models.Dtos
 {
     public class LivroDto : EntidadeBase
     {
-       [Key]
-        public int id { get; set; }
+        public int Id { get; set; }
         public string Nome { get; set; }
         public string Autor { get; set; }
         public string Editora { get; set; }
@@ -19,14 +19,11 @@ namespace LetsCodeBiblioteca.Models.Dtos
 
         public LivroDto()
         {
-            
+
         }
 
-
-       
-
-        public LivroDto(string id, string nome, string autor, string editora, string categoria, int ano)
-            :this(nome, autor, editora, categoria, ano)
+        public LivroDto(int id, string nome, string autor, string editora, string categoria, int ano)
+            : this(nome, autor, editora, categoria, ano)
         {
             this.Id = id;
         }
@@ -43,5 +40,5 @@ namespace LetsCodeBiblioteca.Models.Dtos
         }
     }
 
-    
+
 }

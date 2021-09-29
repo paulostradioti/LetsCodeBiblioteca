@@ -10,9 +10,9 @@ namespace LetsCodeBiblioteca.Models.Contracts.Repositories
     {
         void Cadastrar(LivroDto livro);
         List<LivroDto> Listar();
-        LivroDto PesquisarPorId(string id);
+        LivroDto PesquisarPorId(int id);
         void Atualizar(LivroDto livro);
-        void Excluir(string id);
+        void Excluir(int id);
     }
 
     

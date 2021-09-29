@@ -1,3 +1,4 @@
+using LetsCodeBiblioteca.Models.Contracts.Contexts;
 using LetsCodeBiblioteca.Models.Contracts.Repositories;
 using LetsCodeBiblioteca.Models.Contracts.Services;
 using LetsCodeBiblioteca.Models.Repositories;
@@ -33,8 +34,14 @@ namespace LetsCodeBiblioteca
             services.AddScoped<ILivroRepository, LivroRepository>();
             services.AddScoped<ILivroService, LivroService>();
 
-            services.AddDbContext<Context>();
-           
+            services.AddSingleton<IContextData, ContextDataFake>();
+
+            var connectionString = @"Server=localhost\SQLEXPRESS01;Database=LetsCodeBiblioteca;Trusted_Connection=True;";
+
+            services.AddDbContext<Context>(options =>
+            {
+                options.UseSqlServer(connectionString);
+            });
 
         }
 

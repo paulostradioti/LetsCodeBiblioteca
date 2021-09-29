@@ -1,4 +1,5 @@
-﻿using LetsCodeBiblioteca.Models.Contracts.Repositories;
+﻿using LetsCodeBiblioteca.Models.Contracts.Contexts;
+using LetsCodeBiblioteca.Models.Contracts.Repositories;
 using LetsCodeBiblioteca.Models.Dtos;
 using System;
 using System.Collections.Generic;
@@ -9,43 +10,35 @@ namespace LetsCodeBiblioteca.Models.Repositories
 {
     public class LivroRepository : ILivroRepository
     {
+        private readonly IContextData _contextData; //criação de um objeto
+
+        public LivroRepository(IContextData contextData)//injeção de dependencia dentro do repositório de livro
+        {
+            _contextData = contextData;
+        }
         public void Atualizar(LivroDto livro)
         {
-            var objPesquisa = PesquisarPorId(livro.Id);
-            ContextDataFake.Livros.Remove(objPesquisa);
-
-            objPesquisa.Nome = livro.Nome;
-            objPesquisa.Autor = livro.Autor;
-            objPesquisa.Editora = livro.Editora;
-            objPesquisa.Categoria = livro.Categoria;
-            objPesquisa.Ano = livro.Ano;
-
-            Cadastrar(objPesquisa);
+            _contextData.AtualizarLivro(livro);
         }
 
         public void Cadastrar(LivroDto livro)
         {
-            ContextDataFake.Livros.Add(livro);
+            _contextData.CadastrarLivro(livro);
         }
 
         public void Excluir(string id)
         {
-            var objPesquisa = PesquisarPorId(id);
-            ContextDataFake.Livros.Remove(objPesquisa);
+            _contextData.ExcluirLivro(id);
         }
 
         public List<LivroDto> Listar()
         {
-            var livros = ContextDataFake.Livros;
-            return livros
-                .OrderBy(p => p.Nome)
-                .ToList();
+            return _contextData.ListarLivro();
         }
 
         public LivroDto PesquisarPorId(string id)
         {
-           var livro = ContextDataFake.Livros.FirstOrDefault(p => p.Id == id);
-            return livro;
+            return _contextData.PesquisarLivroPorId(id);
         }
     }
 }

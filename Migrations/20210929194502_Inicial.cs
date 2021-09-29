@@ -2,7 +2,7 @@
 
 namespace LetsCodeBiblioteca.Migrations
 {
-    public partial class InicialCreate : Migration
+    public partial class Inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,7 +17,7 @@ namespace LetsCodeBiblioteca.Migrations
                     Editora = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Categoria = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Ano = table.Column<int>(type: "int", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                   
                 },
                 constraints: table =>
                 {

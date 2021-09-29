@@ -1,4 +1,5 @@
-﻿using LetsCodeBiblioteca.Models.Dtos;
+﻿using LetsCodeBiblioteca.Models.Contracts.Contexts;
+using LetsCodeBiblioteca.Models.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,30 +7,77 @@ using System.Threading.Tasks;
 
 namespace LetsCodeBiblioteca.Models.Repositories
 {
-    public class ContextDataFake
-    {
-        public static List<LivroDto> Livros;
 
-        static ContextDataFake()
+    public class ContextDataFake : IContextData // Implementando a interface criada para trabalhar com qualquer BD
+    {
+        private static List<LivroDto> livros; // vai ter os proprios métodos que vão tratar essa informação, nomeado livro por ser privado
+
+        public ContextDataFake()
         {
-            Livros = new List<LivroDto>();
+            livros = new List<LivroDto>();
             InitializeData();
         }
 
-        private static void InitializeData()
+        public void AtualizarLivro(LivroDto livro)
+        {
+            var objPesquisa = PesquisarLivroPorId(livro.Id);
+            livros.Remove(objPesquisa);
+
+            objPesquisa.Nome = livro.Nome;
+            objPesquisa.Autor = livro.Autor;
+            objPesquisa.Editora = livro.Editora;
+            objPesquisa.Categoria = livro.Categoria;
+            objPesquisa.Ano = livro.Ano;
+
+            CadastrarLivro(objPesquisa);
+        }
+
+        public void CadastrarLivro(LivroDto livro)
+        {
+            try
+            {
+                livros.Add(livro);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void ExcluirLivro(string id)
+        {
+            var objPesquisa = PesquisarLivroPorId(id);
+            livros.Remove(objPesquisa);
+        }
+
+        public List<LivroDto> ListarLivro()
+        {
+           
+            return livros
+                .OrderBy(p => p.Nome)
+                .ToList();
+        }
+
+        public LivroDto PesquisarLivroPorId(string id)
+        {
+           return livros.FirstOrDefault(p => p.Id == id);
+            
+        }
+
+        private void InitializeData() //nao vai ser mais do tipo static
         {
             
             var livro = new LivroDto("Implementando Domain-Driven Design", "Vaugh Vernon", "Alta Books", "Informatica", 1990 );
-            Livros.Add(livro);
+            livros.Add(livro);
 
              livro = new LivroDto("Implementando ", "Eric Vainos", "Alta Books", "Romance", 2001);
-            Livros.Add(livro);
+            livros.Add(livro);
 
             livro = new LivroDto("Domein design", " Vernon", "Alta Books", "Aventura", 2002);
-            Livros.Add(livro);
+            livros.Add(livro);
 
             livro = new LivroDto("Design", "Vaugh ", "Alta Books", "Drama", 1999);
-            Livros.Add(livro);
+            livros.Add(livro);
         }
     }
 }
